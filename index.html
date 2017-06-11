@@ -33,31 +33,13 @@
         <img id="pic9" crossorigin="anonymous" src="media/picture9.JPG">
 
         <!-- Image link template to be reused. -->
-        <script id="link_back" type="text/html">
+        <script id="link" type="text/html">
           <a-entity class="link"
-            geometry="primitive: plane; width: 0.25; height: 0.25"
-            material="shader: flat; src: ${thumb}"
+            geometry="primitive: plane; width: 0.25; height: 0.25;"
+            material="shader: flat; src: ${thumb};"
             event-set__1="_event: mousedown; scale: 1 1 1"
             event-set__2="_event: mouseup; scale: 1.2 1.2 1"            
-            set-image-back="on: click; target: #image-360; src: ${src}"
-            sound="on: click; src: #click-sound"></a-entity>
-        </script>
-        <script id="link_home" type="text/html">
-          <a-entity class="link"
-            geometry="primitive: plane; width: 0.25; height: 0.25"
-            material="shader: flat; src: ${thumb}"
-            event-set__1="_event: mousedown; scale: 1 1 1"
-            event-set__2="_event: mouseup; scale: 1.2 1.2 1"            
-            set-image-home="on: click; target: #image-360; src: ${src}"
-            sound="on: click; src: #click-sound"></a-entity>
-        </script>
-        <script id="link_forward" type="text/html">
-          <a-entity class="link"
-            geometry="primitive: plane; width: 0.25; height: 0.25"
-            material="shader: flat; src: ${thumb}"
-            event-set__1="_event: mousedown; scale: 1 1 1"
-            event-set__2="_event: mouseup; scale: 1.2 1.2 1"            
-            set-image-forward="on: click; target: #image-360; src: ${src}"
+            set-image="on: click; target: #image-360; src: ${src}; action: ${action}"
             sound="on: click; src: #click-sound"></a-entity>
         </script>
       </a-assets>
@@ -82,9 +64,9 @@
       <!-- Image links. -->
       <a-entity id="links" layout="type: line; margin: 0.4" position="0 -1 -2.5">
       <!-- prepare new links for each action -->
-        <a-entity id="back" template="src: #link_back" data-src="" data-thumb="#back"></a-entity>
-        <a-entity id="home" template="src: #link_home" data-src="" data-thumb="#home"></a-entity>
-        <a-entity id="forward" template="src: #link_forward" data-src="" data-thumb="#forward"></a-entity>
+        <a-entity id="back" template="src: #link" data-src="" data-thumb="#back" data-action="back"></a-entity>
+        <a-entity id="home" template="src: #link" data-src="" data-thumb="#home" data-action="home"></a-entity>
+        <a-entity id="forward" template="src: #link" data-src="" data-thumb="#forward" data-action="forward"></a-entity>
       </a-entity>
 
       <!-- Camera + cursor. -->
