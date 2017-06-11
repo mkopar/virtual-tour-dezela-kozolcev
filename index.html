@@ -1,23 +1,103 @@
-<a-scene>
-  <a-assets>
-    <audio id="click-sound" src="audio/click.ogg"></audio>
-    <!-- Images. -->
-    <img id="entrance" src="media/entrance.JPG">
-    <img id="city-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
-    <img id="picture1" src="media/picture1.JPG">
-    <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
-  </a-assets>
-  <!-- 360-degree image. -->
-  <a-sky id="image-360" radius="10" src="#city"></a-sky>
-  <!-- Link we will build. -->
-  <a-entity class="link"></a-entity>
-  <!-- Camera + Cursor. -->
-  <a-camera>
-    <a-cursor id="cursor">
-      <a-animation begin="click" easing="ease-in" attribute="scale"
-                   fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-      <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
-                   from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
-    </a-cursor>
-  </a-camera>
-</a-scene>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dežela kozolcev</title>
+    <meta name="description" content="360&deg; Dezela kozolcev">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="components/set-image.js"></script>
+  </head>
+  <link rel="icon" 
+      type="image/png" 
+      href="favicon.png" />
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="home" crossorigin="anonymous" src="media/home1600.png">
+        <img id="back" crossorigin="anonymous" src="media/back1600.png">
+        <img id="forward" crossorigin="anonymous" src="media/forward1600.png">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="pic0" crossorigin="anonymous" src="media/picture0.JPG">
+        <img id="pic1" crossorigin="anonymous" src="media/picture1.JPG">
+        <img id="pic2" crossorigin="anonymous" src="media/picture2.JPG">
+        <img id="pic3" crossorigin="anonymous" src="media/picture3.JPG">
+        <img id="pic4" crossorigin="anonymous" src="media/picture4.JPG">
+        <img id="pic5" crossorigin="anonymous" src="media/picture5.JPG">
+        <img id="pic6" crossorigin="anonymous" src="media/picture6.JPG">
+        <img id="pic7" crossorigin="anonymous" src="media/picture7.JPG">
+        <img id="pic8" crossorigin="anonymous" src="media/picture8.JPG">
+        <img id="pic9" crossorigin="anonymous" src="media/picture9.JPG">
+
+        <!-- Image link template to be reused. -->
+        <script id="link_back" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; width: 0.25; height: 0.25"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"            
+            set-image-back="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+        <script id="link_home" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; width: 0.25; height: 0.25"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"            
+            set-image-home="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+        <script id="link_forward" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; width: 0.25; height: 0.25"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"            
+            set-image-forward="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+      </a-assets>
+
+      <!-- 360-degree image. -->
+      <!-- Dynamically create a-sky in javascript -->
+      <a-sky id="image-360" radius="10" src="#pic0" phi-start="275"></a-sky>
+
+      <input type="hidden" id="pic_num" value="0">
+
+      <input type="hidden" id="pic0_phi" value="275">
+      <input type="hidden" id="pic1_phi" value="280">
+      <input type="hidden" id="pic2_phi" value="220">
+      <input type="hidden" id="pic3_phi" value="200">
+      <input type="hidden" id="pic4_phi" value="240">
+      <input type="hidden" id="pic5_phi" value="310">
+      <input type="hidden" id="pic6_phi" value="320">
+      <input type="hidden" id="pic7_phi" value="280">
+      <input type="hidden" id="pic8_phi" value="280">
+      <input type="hidden" id="pic9_phi" value="230">
+
+      <!-- Image links. -->
+      <a-entity id="links" layout="type: line; margin: 0.4" position="0 -1 -2.5">
+      <!-- prepare new links for each action -->
+        <a-entity id="back" template="src: #link_back" data-src="" data-thumb="#back"></a-entity>
+        <a-entity id="home" template="src: #link_home" data-src="" data-thumb="#home"></a-entity>
+        <a-entity id="forward" template="src: #link_forward" data-src="" data-thumb="#forward"></a-entity>
+      </a-entity>
+
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          color="lightgrey"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          geometry="primitive: ring; radiusInner: 0.004; radiusOuter: 0.008"
+          event-set__1="_event: mouseenter; color: grey"
+          event-set__2="_event: mouseleave; color: lightgrey"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
