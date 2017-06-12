@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Dežela kozolcev</title>
-    <meta name="description" content="360&deg; Dezela kozolcev">
+    <meta name="description" content="360&deg; Dežela kozolcev">
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
     <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
@@ -11,9 +11,7 @@
     <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
     <script src="components/set-image.js"></script>
   </head>
-  <link rel="icon" 
-      type="image/png" 
-      href="favicon.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
   <body>
     <a-scene>
       <a-assets>
@@ -38,8 +36,10 @@
             geometry="primitive: plane; width: 0.25; height: 0.25;"
             material="shader: flat; src: ${thumb};"
             event-set__1="_event: mousedown; scale: 1 1 1"
-            event-set__2="_event: mouseup; scale: 1.2 1.2 1"            
-            set-image="on: click; target: #image-360; src: ${src}; action: ${action}"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; action: ${action}"
             sound="on: click; src: #click-sound"></a-entity>
         </script>
       </a-assets>
@@ -64,9 +64,9 @@
       <!-- Image links. -->
       <a-entity id="links" layout="type: line; margin: 0.4" position="0 -1 -2.5">
       <!-- prepare new links for each action -->
-        <a-entity id="back" template="src: #link" data-src="" data-thumb="#back" data-action="back"></a-entity>
-        <a-entity id="home" template="src: #link" data-src="" data-thumb="#home" data-action="home"></a-entity>
-        <a-entity id="forward" template="src: #link" data-src="" data-thumb="#forward" data-action="forward"></a-entity>
+        <a-entity id="back" template="src: #link" data-thumb="#back" data-action="back"></a-entity>
+        <a-entity id="home" template="src: #link" data-thumb="#home" data-action="home"></a-entity>
+        <a-entity id="forward" template="src: #link" data-thumb="#forward" data-action="forward"></a-entity>
       </a-entity>
 
       <!-- Camera + cursor. -->
@@ -75,7 +75,7 @@
           color="lightgrey"
           animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
           animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
-          geometry="primitive: ring; radiusInner: 0.004; radiusOuter: 0.008"
+          geometry="primitive: ring; radiusInner: 0.004; radiusOuter: 0.012"
           event-set__1="_event: mouseenter; color: grey"
           event-set__2="_event: mouseleave; color: lightgrey"
           raycaster="objects: .link"></a-cursor>
